@@ -3,8 +3,15 @@
     padding: 0px;
     list-style: none;
     box-sizing: border-box;
-    background-color: gray;
     text-align: center;
+    text-decoration: none;
+    background-color: #F2E2C4;
+    color:#4A4A4A;
+}
+
+button{
+    background-color: none;
+    border: none;
 }
 
 html {
@@ -12,6 +19,9 @@ html {
     list-style: none;
 }
 
+html, body {
+    height: 100%;
+}
 ul {
     display: flex;
     justify-content: end;
@@ -38,36 +48,72 @@ label{
     width: 100%;
   }
   
-
-table {
-    padding: 0 40px;
-    width: 100%;
-    border-spacing: 0 20px;
+  td, th {
+    padding: 10px;
+    vertical-align: top;
+    max-width: 500px
   }
   
   th {
     text-align: left;
-    padding: 6px 20px 0 0;
-    font-weight: normal;
-    vertical-align: top;
-    font-size: var(--font-reg);
+    width: 150px; 
   }
   
-  td {
-    max-width: 60%;
-  }
+  /* td {
+    display: flex; 
+    align-items: center;
+  } */
   
-  td > * {
+  td input {
     width: 100%;
-    padding: 2px 4px;
-    font-size: var(--font-l);
+    padding: 8px;
+    font-size: 1rem;
+    border-radius: 10px;
+  } 
+
+  .helptext {
+    display: none;
   }
-  
-  td > textarea {
-    height: calc(4 * var(--font-l) + 8px);
-    font-family: inherit;
+
+  .radiolist {
+    display: flex;
   }
 
   p {
+    font-size: 1.25rem;
+  }
+
+  h1 {
     font-size: 2rem;
+  }
+  .about-page {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat; /* Ensures full background coverage */
+    padding: 20px;
+    min-height: 100%;
+  }
+
+  a:visited{
+    color:black;
+  }
+
+  .btn{
+    font-size: 1rem;
+    padding: 0.5rem;
+    border: 1px solid black;
+    border-radius: 10px;
+  }
+
+  .btn:hover{
+    background-color: gray;
+    color: white;
+  }
+
+
+  .center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;  
   }

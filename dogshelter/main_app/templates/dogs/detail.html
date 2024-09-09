@@ -26,18 +26,16 @@
 <div class="add-vacine-form">
     <h3>Add a Vacine</h3>
   <!-- Add just above the feedings table -->
-  <form method="post" class="subsection-content" autocomplete="off">
+  <form action="{% url 'add-vaccine' dog.id %}" method="post" class="subsection-content" autocomplete="off">
     {% csrf_token %} 
     {{ vacination_form.as_p }}
     <button type="submit" class="btn submit">Add a Vacine</button>
   </form>
 </div>
 <div class="">
-    <section class="">
       <div class="subsection-title">
-        <h2>Vacinations Record</h2>
+        <h2>Vaccinations Record</h2>
       </div>
-      <h3>Past Vaccine</h3>
       {% if dog.vacination_set.all.count %}
         <table>
           <thead>
@@ -60,7 +58,6 @@
           <p>⚠️ {{dog.name}} has no record!</p>
         </div>
       {% endif %}
-    </section>
-    </section>
+  </section>
   </div>
 {% endblock %}

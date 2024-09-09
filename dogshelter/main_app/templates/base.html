@@ -15,11 +15,6 @@
   <body>
     <header>
       <nav>
-        <div class="header-logo-container">
-            <a href="/">
-              <img src="" alt="The Dog Collector Logo" />
-            </a>
-        </div>
         <ul>
           {% if user.is_authenticated %}
             <li><a href="{% url 'dog-index' %}">All Dogs</a></li>
@@ -42,6 +37,6 @@
     <main>
      {% block content %} 
      {% endblock %}
-     </main>
+    </main>
   </body>
 </html>

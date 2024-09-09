@@ -1,13 +1,14 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.views import LoginView
-from django.views.generic.edit import CreateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from .models import Dog
 from .forms import VacinationForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class Home(LoginView):
@@ -24,7 +25,7 @@ def signup(request):
             user = form.save()
             # This is how we log a user in
             login(request, user)
-            return redirect('cat-index')
+            return redirect('dog-index')
         else:
             error_message = 'Invalid sign up - try again'
     # A bad POST or a GET request, so render signup.html with an empty form
@@ -35,16 +36,18 @@ def signup(request):
 def about(request):
     return render(request, 'about.html')
 
+@login_required
 def dog_index(request):
     # Render the dogs/index.html template with the dogs data
     dogs = Dog.objects.all()
     return render(request, 'dogs/index.html', {'dogs': dogs})
 
-
+@login_required
 def dog_detail(request, dog_id):
     dog = Dog.objects.get(id=dog_id)
     vacination_form = VacinationForm()
     return render(request, 'dogs/detail.html', {'dog': dog, 'vacination_form': vacination_form})
+
 
 def add_vaccine(request, dog_id):
     # create a ModelForm instance using the data in request.POST
@@ -59,7 +62,7 @@ def add_vaccine(request, dog_id):
     return redirect('dog-detail', dog_id=dog_id)
 
 
-class DogCreate(CreateView):
+class DogCreate(LoginRequiredMixin,CreateView):
     model = Dog
     fields = '__all__'
     success_url = '/dogs/'
@@ -69,11 +72,11 @@ def form_valid(self, form):
         # Let the CreateView do its job as usual
         return super().form_valid(form)
 
-class DogUpdate(UpdateView):
+class DogUpdate(LoginRequiredMixin,UpdateView):
     model = Dog
     # Let's disallow the renaming of a Dog by excluding the name field!
     fields = ['breed', 'description', 'age', 'status']
 
-class DogDelete(DeleteView):
+class DogDelete(LoginRequiredMixin,DeleteView):
     model = Dog
     success_url = '/dogs/'

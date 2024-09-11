@@ -83,3 +83,15 @@
   }
 
 
+  .btn-delete {
+    background-color: none;
+    border: none;
+    padding: 0;
+    margin-left: 10px;
+  }
+
+  .btn-edit {
+    border: none;
+    padding: 0;
+    margin: 0;
+  }

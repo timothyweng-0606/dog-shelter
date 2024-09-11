@@ -1,11 +1,10 @@
-from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.views import LoginView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
-from .models import Dog
+from .models import Dog, Vacination
 from .forms import VacinationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -63,7 +62,8 @@ class DogCreate(LoginRequiredMixin,CreateView):
     model = Dog
     fields = '__all__'
     success_url = '/dogs/'
-def form_valid(self, form):
+    
+    def form_valid(self, form):
         form.instance.user = self.request.user  
         return super().form_valid(form)
 
@@ -74,3 +74,27 @@ class DogUpdate(LoginRequiredMixin,UpdateView):
 class DogDelete(LoginRequiredMixin,DeleteView):
     model = Dog
     success_url = '/dogs/'
+
+def edit_vaccine(request, dog_id, vaccine_id):
+    dog = get_object_or_404(Dog, id=dog_id)
+    vaccine = get_object_or_404(Vacination, id=vaccine_id, dog=dog)
+
+    if request.method == 'POST':
+        form = VacinationForm(request.POST, instance=vaccine)
+        if form.is_valid():
+            form.save()
+            return redirect('dog-detail', dog_id=dog.id)
+    else:
+        form = VacinationForm(instance=vaccine)
+
+    return render(request, 'edit_vaccine.html', {'form': form, 'dog': dog})
+
+def delete_vaccine(request, dog_id, vaccine_id):
+    dog = get_object_or_404(Dog, id=dog_id)
+    vaccine = get_object_or_404(Vacination, id=vaccine_id, dog=dog)
+
+    if request.method == 'POST':
+        vaccine.delete()
+        return redirect('dog-detail', dog_id=dog.id)
+
+    return redirect('dog-detail', dog_id=dog.id)

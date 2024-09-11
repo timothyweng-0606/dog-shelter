@@ -1,6 +1,6 @@
 # Dog Shelter ( Django CRUD DogShelter App) 🍿
 
-![Moview Review Image](https://github.com/user-attachments/assets/88dd00ee-32e8-40a3-b76e-807ece10ebfa)
+![Dog Shelter Image](https://github.com/user-attachments/assets/415365f3-7661-4fcc-81f8-51c8b059479b)
 
 ## Description 📝
 Dog Shelter is a dog shelter management dashboard where users are able to view the status of each dogs, the total number of dogs in the shelter and the vaccination records of each dogs.

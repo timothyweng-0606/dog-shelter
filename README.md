@@ -29,5 +29,6 @@ None
 
 ## Next Step 👉🏼
 Add many to many relationships in the data model
+Enhance UI view
 
 

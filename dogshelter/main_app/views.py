@@ -17,18 +17,13 @@ class Home(LoginView):
 def signup(request):
     error_message = ''
     if request.method == 'POST':
-        # This is how to create a 'user' form object
-        # that includes the data from the browser
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            # This will add the user to the database
             user = form.save()
-            # This is how we log a user in
             login(request, user)
             return redirect('dog-index')
         else:
             error_message = 'Invalid sign up - try again'
-    # A bad POST or a GET request, so render signup.html with an empty form
     form = UserCreationForm()
     context = {'form': form, 'error_message': error_message}
     return render(request, 'signup.html', context)
@@ -38,9 +33,15 @@ def about(request):
 
 @login_required
 def dog_index(request):
-    # Render the dogs/index.html template with the dogs data
-    dogs = Dog.objects.all()
-    return render(request, 'dogs/index.html', {'dogs': dogs})
+    status_filter = request.GET.get('status')
+    if status_filter in ['N', 'A', 'I']:
+        dogs = Dog.objects.filter(status=status_filter)
+    else:
+        dogs = Dog.objects.all()
+
+        total_dogs = Dog.objects.filter(status__in=['N', 'I']).count()
+
+    return render(request, 'dogs/index.html', {'dogs': dogs, 'total_dogs': total_dogs})
 
 @login_required
 def dog_detail(request, dog_id):
@@ -50,12 +51,8 @@ def dog_detail(request, dog_id):
 
 
 def add_vaccine(request, dog_id):
-    # create a ModelForm instance using the data in request.POST
     form = VacinationForm(request.POST)
-    # validate the form
     if form.is_valid():
-        # don't save the form to the db until it
-        # has the cat_id assigned
         new_vaccine = form.save(commit=False)
         new_vaccine.dog_id = dog_id
         new_vaccine.save()
@@ -67,14 +64,11 @@ class DogCreate(LoginRequiredMixin,CreateView):
     fields = '__all__'
     success_url = '/dogs/'
 def form_valid(self, form):
-        # Assign the logged in user (self.request.user)
-        form.instance.user = self.request.user  # form.instance is the cat
-        # Let the CreateView do its job as usual
+        form.instance.user = self.request.user  
         return super().form_valid(form)
 
 class DogUpdate(LoginRequiredMixin,UpdateView):
     model = Dog
-    # Let's disallow the renaming of a Dog by excluding the name field!
     fields = ['breed', 'description', 'age', 'status']
 
 class DogDelete(LoginRequiredMixin,DeleteView):

@@ -7,6 +7,18 @@
 
 <section class="page-header">
   <h1>Dog List</h1>
+  <p>Total Dogs in Shelter: {{ total_dogs }}</p>
+</section>
+
+<section class="filter-section">
+  <form method="get" action="">
+    <select name="status" onchange="this.form.submit()">
+      <option value="">All</option>
+      <option value="N" {% if request.GET.status == 'N' %}selected{% endif %}>Not Adopted</option>
+      <option value="A" {% if request.GET.status == 'A' %}selected{% endif %}>Adopted</option>
+      <option value="I" {% if request.GET.status == 'I' %}selected{% endif %}>Interest</option>
+    </select>
+  </form>
 </section>
 
 <section class="card-container">

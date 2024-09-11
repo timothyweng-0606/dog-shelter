@@ -45,7 +45,7 @@ label{
 .form-container {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    /* width: 100%; */
   }
   
   td, th {
@@ -59,17 +59,12 @@ label{
     width: 150px; 
   }
   
-  /* td {
-    display: flex; 
-    align-items: center;
-  } */
-  
   td input {
-    width: 100%;
+    width: 300px;        /* Set a specific width */
     padding: 8px;
     font-size: 1rem;
     border-radius: 10px;
-  } 
+  }
 
   .helptext {
     display: none;

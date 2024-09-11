@@ -1,0 +1,63 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/dogs/dog-detail.css' %}" />
+{% endblock %} 
+{% block content %}
+<section class="dog-container">
+  <div class="dog-img">
+    <img src="{% static 'images/dog placement photo.png' %}" alt="A cute dog" />
+  </div>
+  <div class="dog-details">
+    <h1>{{ dog.name }}</h1>
+    {% if dog.age > 0 %}
+      <p>Age: {{ dog.age }}</p>
+      <p>{{ dog.breed }}</p>
+    {% else %}
+      <h2>A {{ dog.breed }}</h2>
+    {% endif %}
+    <p>Background: {{ dog.description }}</p>
+    <p>Status: {{dog.status}}</p>
+  </div>
+  <div class="dog-actions">
+    <a href="{% url 'dog-update' dog.id %}" class="btn warn">Edit</a>
+    <a href="{% url 'dog-delete' dog.id %}" class="btn danger">Delete</a>
+  </div>
+<div class="add-vacine-form">
+    <h3>Add a Vacine</h3>
+  <!-- Add just above the feedings table -->
+  <form action="{% url 'add-vaccine' dog.id %}" method="post" class="subsection-content" autocomplete="off">
+    {% csrf_token %} 
+    {{ vacination_form.as_p }}
+    <button type="submit" class="btn submit">Add a Vacine</button>
+  </form>
+</div>
+<div class="">
+      <div class="subsection-title">
+        <h2>Vaccinations Record</h2>
+      </div>
+      {% if dog.vacination_set.all.count %}
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Vacinations</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for vacination in dog.vacination_set.all %}
+            <tr>
+              <td>{{vacination.date}}</td>
+              <td>{{vacination.vacinations}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% else %}
+        <div class="subsection-content">
+          <p>⚠️ {{dog.name}} has no record!</p>
+        </div>
+      {% endif %}
+  </section>
+  </div>
+{% endblock %}

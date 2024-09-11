@@ -1,0 +1,85 @@
+/* .dog-container {
+    padding: 35px 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.dog-img img{
+    width: 400px;
+    height: 100%;
+}
+
+.add-vacine-form form{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+} */
+
+.dog-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh; /* Ensures the container takes up full viewport height */
+    text-align: center;
+    padding: 20px;
+    gap: 10px; /* Adds space between elements vertically */
+  }
+
+ p{
+    font-size: 1.25rem;
+    margin: 0.5rem;
+ }
+  
+  .dog-img img {
+    max-width: 500px; /* Ensures the image does not overflow */
+    height: auto;
+    margin-bottom: 20px; /* Adds space below the image */
+  }
+  
+  .dog-details, .dog-actions, .add-vacine-form{
+    margin-bottom: 30px; /* Adds more space between the elements */
+    width: 100%;
+    max-width: 600px; /* Ensures that the content doesn't stretch too far */
+  }
+  
+  .dog-actions {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Adds space between the Edit and Delete buttons */
+    margin-bottom: 20px; /* Adds space below the action buttons */
+  }
+  
+  form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px; /* Space between form elements */
+  }
+  
+  /* table {
+    width: 100%;
+    di
+    margin-top: 20px;
+  } */
+
+  /* table {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  tr {
+    display: flex;
+  }
+   */
+  .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 10px;
+    text-align: center;
+  }
+
+

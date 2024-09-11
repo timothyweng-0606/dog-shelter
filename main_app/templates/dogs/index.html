@@ -1,0 +1,49 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/dogs/dog-index.css' %}"/>
+{% endblock %} 
+{% block content %}
+
+<section class="page-header">
+  <h1>Dog List</h1>
+  <p>Total Dogs in Shelter: {{ total_dogs }}</p>
+</section>
+
+<section class="filter-section">
+  <form method="get" action="">
+    <select name="status" onchange="this.form.submit()">
+      <option value="">All</option>
+      <option value="N" {% if request.GET.status == 'N' %}selected{% endif %}>Not Adopted</option>
+      <option value="A" {% if request.GET.status == 'A' %}selected{% endif %}>Adopted</option>
+      <option value="I" {% if request.GET.status == 'I' %}selected{% endif %}>Interest</option>
+    </select>
+  </form>
+</section>
+
+<section class="card-container">
+    {% for dog in dogs %}
+      <div class="card">
+        <a href="{% url 'dog-detail' dog.id %}">
+          <div class="card-content">
+            <div class="card-img-container" >
+                <img src="{% static 'images/dog placement photo.png' %}" alt="A cute dog" />
+            </div>
+            <h2 class="card-title">{{ dog.name }}</h2>
+            {% if dog.age > 1 %}
+            <p>Age: {{ dog.age }} Years Old</p>
+            {% elif dog.age == 1 %}
+            <p>Age: {{ dog.age }} Year Old</p>
+            {% else %}
+            <p>Age: {{ dog.age }} Month Old</p>
+            {% endif %}
+            <p>Breed: {{ dog.breed }}</p>
+            <p>Status: {{dog.get_status_display}}</p>
+          </div>
+        </a>
+      </div>
+    {% endfor %}
+  </section>
+  
+
+{% endblock %}

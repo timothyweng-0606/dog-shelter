@@ -38,7 +38,7 @@ def dog_index(request):
     else:
         dogs = Dog.objects.all()
 
-        total_dogs = Dog.objects.filter(status__in=['N', 'I']).count()
+    total_dogs = Dog.objects.filter(status__in=['N', 'I']).count()
 
     return render(request, 'dogs/index.html', {'dogs': dogs, 'total_dogs': total_dogs})
 

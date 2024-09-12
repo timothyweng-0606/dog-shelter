@@ -24,7 +24,7 @@
     <a href="{% url 'dog-delete' dog.id %}" class="btn danger">Delete</a>
   </div>
 <div class="add-vacine-form">
-    <h3>Add a Vacine</h3>
+    <h3>Add Vaccine</h3>
   <!-- Add just above the feedings table -->
   <form action="{% url 'add-vaccine' dog.id %}" method="post" class="subsection-content" autocomplete="off">
     {% csrf_token %} 

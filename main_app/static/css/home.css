@@ -1,5 +1,5 @@
   
-  .login h1 {
+  /* .login h1 {
     margin: 10px 0;
   }
   
@@ -16,6 +16,19 @@
   
   .login input {
     padding: 2px 4px;
+  } */
+
+  .login h1 {
+    margin-bottom: 10px;
+  }
+  
+  .login label {
+    margin-top: 1px;
+  }
+
+  .login input{
+    width: 100px;
+
   }
   
   .login .btn {

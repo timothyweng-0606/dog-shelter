@@ -112,3 +112,7 @@ label{
     align-items: center;
     height: 100vh;  
   }
+
+  input {
+    width: 300px;
+  }

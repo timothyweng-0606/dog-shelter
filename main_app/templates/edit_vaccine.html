@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+  <div class="edit-vaccine-form">
+    <h2>Edit Vaccination</h2>
+    <form action="" method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn submit">Save Changes</button>
+    </form>
+    <a href="{% url 'dog-detail' dog.id %}">Cancel</a>
+  </div>
+
+  {% endblock %}

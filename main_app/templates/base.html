@@ -20,7 +20,7 @@
             <li><a href="{% url 'dog-index' %}">All Dogs</a></li>
             <li><a href="{% url 'dog-create' %}">Add a Dog</a></li>
             <li><a href="{% url 'about' %}">About</a></li>
-            <li>
+            <li>     <!-- {% url 'admin:logout' %} -->
                 <form id="logout-form" method="post" action="{% url 'admin:logout' %}">
                   {% csrf_token %}
                   <button type="submit">Log out</button>
